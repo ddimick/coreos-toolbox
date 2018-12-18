@@ -1,0 +1,14 @@
+version: "3.2"
+
+services:
+
+  console:
+    image: kendokan/console:latest
+    build: ~/build/console
+    hostname: console
+    volumes:
+      - ~/build:/home/core/build
+      - ~/services:/home/core/services
+      - ~/volumes:/home/core/volumes
+      - /var/run/docker.sock:/var/run/docker.sock
+
