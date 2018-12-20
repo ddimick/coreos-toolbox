@@ -7,6 +7,9 @@ services:
     build: ~/build/console
     hostname: console
     volumes:
+      - ~/.ssh:/home/core/.ssh
+      - ~/.git:/home/core/.git
+      - ~/.gitconfig:/home/core/.gitconfig
       - ~/build:/home/core/build
       - ~/services:/home/core/services
       - ~/volumes:/home/core/volumes
