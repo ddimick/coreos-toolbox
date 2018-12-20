@@ -9,8 +9,9 @@ ENV DOCKERCOMPOSE_VERSION=1.23.0
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y zsh zsh-common git git-core tmux sed curl wget \
-        sudo net-tools inetutils-ping bash-completion tmux openssh-client vim \
-        gcc make autoconf tzdata docker.io powerline && \
+        sudo net-tools inetutils-ping bash-completion openssh-client vim \
+        gcc make autoconf tzdata locales docker.io && \
+    locale-gen en_US.UTF-8 && \
   # docker-compose
     curl -L https://github.com/docker/compose/releases/download/${DOCKERCOMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose && \
     chmod +x /usr/local/bin/docker-compose && \
@@ -26,7 +27,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt
 
-COPY files/.* $HOME/
+COPY config-files/.* $HOME/
+COPY ohmyzsh-files/custom.zsh-theme $HOME/.oh-my-zsh/custom/themes/
 
 RUN chown -R core:core $HOME
 

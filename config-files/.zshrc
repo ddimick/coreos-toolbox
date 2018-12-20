@@ -11,7 +11,7 @@ export TERM=screen-256color
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-#ZSH_THEME="random"
+ZSH_THEME="custom"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -97,9 +97,9 @@ export USER3='Doug'
 source $ZSH/oh-my-zsh.sh
 
 # Powerline
-if [[ -r /usr/share/powerline/bindings/zsh/powerline.zsh ]]; then
-  source /usr/share/powerline/bindings/zsh/powerline.zsh
-fi
+#if [[ -r /usr/share/powerline/bindings/zsh/powerline.zsh ]]; then
+#  source /usr/share/powerline/bindings/zsh/powerline.zsh
+#fi
 
 alias df='df -hl'
 alias ls='ls -lFGh --color'
