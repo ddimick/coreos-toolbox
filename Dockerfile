@@ -10,7 +10,7 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y zsh zsh-common git git-core tmux sed curl wget \
         sudo net-tools inetutils-ping bash-completion tmux openssh-client vim \
-        tzdata docker.io powerline && \
+        gcc make autoconf tzdata docker.io powerline && \
   # docker-compose
     curl -L https://github.com/docker/compose/releases/download/${DOCKERCOMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose && \
     chmod +x /usr/local/bin/docker-compose && \
