@@ -4,7 +4,7 @@ services:
 
   console:
     image: kendokan/console:latest
-    build: ~/build/console
+    build: /mnt/system0/docker/build/console
     hostname: console
     volumes:
       - ~/.ssh:/home/core/.ssh

@@ -14,7 +14,7 @@ export TERM=screen-256color
 ZSH_THEME="custom"
 
 # Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
@@ -52,9 +52,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Automatically start a tmux session upon logging in. Set to false by default.
-#if [[ -n $SSH_CONNECTION ]]; then
-  ZSH_TMUX_AUTOSTART="true"
-#fi
+ZSH_TMUX_AUTOSTART="true"
 
 # Only attempt to autostart tmux once. If this is disabled when the previous option is enabled, then tmux will be autostarted every time you source your zsh config files. Set to true by default.
 #ZSH_TMUX_AUTOSTART_ONCE = "true"
@@ -83,30 +81,17 @@ export LESS='-m --follow-name'
 
 # Options used by docker-compose.
 export COMPOSE_PROJECT_NAME=mystack
-export PROJECT_PATH=~
-export NFS_SERVER='172.16.0.1'
-export NFS_OPTIONS='vers=4.0'
-export USER_PATH='/mnt/user0'
-export MEDIA_PATH='/mnt/media0'
-export SYSTEM_PATH='/mnt/system0'
-export USER1='Alison'
-export USER2='Chloe'
-export USER3='Doug'
+export PROJECT_PATH=~/docker
 
 # This needs to come before any custom aliases.
 source $ZSH/oh-my-zsh.sh
-
-# Powerline
-#if [[ -r /usr/share/powerline/bindings/zsh/powerline.zsh ]]; then
-#  source /usr/share/powerline/bindings/zsh/powerline.zsh
-#fi
 
 alias df='df -hl'
 alias ls='ls -lFGh --color'
 alias lls='ls -C'
 alias iotop='iotop -o'
 alias journalctl='journalctl -e'
-alias docker-compose='export COMPOSE_FILE=`find ~/ -maxdepth 3 -type f -name docker-compose.yaml -printf "${HOME}/%P:" | sed "s/:*$//"`; docker-compose'
+alias docker-compose='export COMPOSE_FILE=`find ~/docker/ -maxdepth 3 -type f -name docker-compose.yaml -printf "${HOME}/docker/%P:" | sed "s/:*$//"`; docker-compose'
 alias compose='docker-compose'
 alias console='compose exec'
 alias log='compose logs -f --tail="100"'

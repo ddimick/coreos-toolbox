@@ -5,6 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV HOME=/home/core
 ENV TZ=America/Los_Angeles
 ENV DOCKERCOMPOSE_VERSION=1.23.0
+ENV CT_VER=v0.6.1
 
 RUN apt-get update && \
     apt-get upgrade -y && \
@@ -23,6 +24,9 @@ RUN apt-get update && \
   # oh-my-zsh
     curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | zsh || true && \
     rm -R ~/.oh-my-zsh/plugins/last-working-dir && \
+  # CoreOS config transpiler
+    curl -L https://github.com/coreos/container-linux-config-transpiler/releases/download/${CT_VER}/ct-${CT_VER}-x86_64-unknown-linux-gnu -o /usr/local/bin/ct && \
+    chmod +x /usr/local/bin/ct && \
   # cleanup
     apt-get clean && \
     rm -rf /var/lib/apt
