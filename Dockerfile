@@ -28,6 +28,8 @@ RUN apt-get update && \
 
 COPY files/.* $HOME/
 
+RUN chown -R core:core $HOME
+
 ENV DEBIAN_FRONTEND=teletype
 
 WORKDIR $HOME
