@@ -1,11 +1,10 @@
-version: "3.2"
+version: "3.7"
 
 services:
-
-  console:
-    image: kendokan/console:latest
-    build: /mnt/system0/docker/build/console
-    hostname: console
+  toolbox:
+    image: ddimick/coreos-toolbox:latest
+    build: ${PROJECT_PATH}/build/coreos-toolbox
+    hostname: toolbox
     volumes:
       - ~/.ssh:/home/core/.ssh
       - ~/.git:/home/core/.git
@@ -13,4 +12,3 @@ services:
       - /mnt:/mnt
       - /mnt/system0/docker:/home/core/docker
       - /var/run/docker.sock:/var/run/docker.sock
-
