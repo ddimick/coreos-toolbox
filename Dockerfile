@@ -1,46 +1,51 @@
 # Set the base image to Ubuntu Server
-FROM ubuntu:latest
+FROM alpine:latest
 
-ENV DEBIAN_FRONTEND=noninteractive
-ENV HOME=/home/core
 ENV TZ=America/Los_Angeles
 ENV DOCKERCOMPOSE_VERSION=1.23.0
 ENV CT_VER=v0.6.1
+ENV USER_NAME=core USER_UID=500 USER_GID=500 DOCKER_GID=233
+ENV HOME=/home/${USER_NAME}
 
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y zsh zsh-common git git-core tmux sed curl wget \
-        sudo net-tools inetutils-ping bash-completion openssh-client vim \
-        gcc make autoconf tzdata locales docker.io rsync && \
-    locale-gen en_US.UTF-8 && \
-  # docker-compose
-    curl -L https://github.com/docker/compose/releases/download/${DOCKERCOMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose && \
-    chmod +x /usr/local/bin/docker-compose && \
-  # user/group creation
-    groupadd --gid 500 core && \
-    groupmod --gid 233 docker && \
-    useradd --home-dir /home/core --uid 500 --gid 500 --groups docker --comment 'CoreOS Admin' -s /bin/zsh core && \
+# Package installation
+RUN apk add --no-cache \
+      shadow \
+      docker \
+      py-pip \
+      sudo \
+      findutils \
+      git \
+      zsh \
+      docker-zsh-completion \
+      git-zsh-completion \
+      rsync-zsh-completion \
+      tmux-zsh-completion \
+      zsh-vcs \
+      tmux \
+      curl \
+      vim \
+      docker-vim \
+      rsync && \
+    apk add --no-cache --virtual .build-dependencies py-pip && \
+    pip install --disable-pip-version-check --no-cache-dir docker-compose && \
+    apk del .build-dependencies && \
+# User and group creation
+    groupmod --gid ${DOCKER_GID} docker && \
+    groupadd --gid ${USER_GID} ${USER_NAME} && \
+    useradd --uid ${USER_UID} --gid ${USER_GID} --groups docker --shell /bin/zsh --comment 'CoreOS Admin' core && \
     echo "core ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-  # oh-my-zsh
-    curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | zsh || true && \
-    rm -R ~/.oh-my-zsh/plugins/last-working-dir && \
-  # CoreOS config transpiler
-    curl -L https://github.com/coreos/container-linux-config-transpiler/releases/download/${CT_VER}/ct-${CT_VER}-x86_64-unknown-linux-gnu -o /usr/local/bin/ct && \
+# Install CoreOS cloud-config.yaml to ignition.json Config Transpiler
+    curl -LSs https://github.com/coreos/container-linux-config-transpiler/releases/download/${CT_VER}/ct-${CT_VER}-x86_64-unknown-linux-gnu -o /usr/local/bin/ct && \
     chmod +x /usr/local/bin/ct && \
-  # cleanup
-    apt-get clean && \
-    rm -rf /var/lib/apt
+# Install oh-my-zsh
+    curl -LSs https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | zsh || true
 
-COPY config-files/.* $HOME/
-COPY ohmyzsh-files/custom.zsh-theme $HOME/.oh-my-zsh/custom/themes/
+COPY files/ ${HOME}/
 
-RUN chown -R core:core $HOME
+RUN chown -R ${USER_UID}:${USER_GID} ${HOME}
 
-ENV DEBIAN_FRONTEND=teletype
+WORKDIR ${HOME}
 
-WORKDIR $HOME
-
-USER core
+USER ${USER_NAME}
 
 CMD ["/bin/zsh"]
-

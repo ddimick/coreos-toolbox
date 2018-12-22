@@ -36,7 +36,7 @@ CASE_SENSITIVE="true"
 ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="false"
+#COMPLETION_WAITING_DOTS="false"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -73,7 +73,7 @@ ZSH_TMUX_FIXTERM="true"
 plugins=(sudo tmux git colored-man-pages zsh-syntax-highlighting docker docker-compose systemd)
 
 # User configuration
-export PATH="~/.local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin"
+# export PATH="~/.local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 export EDITOR='vim'
 export PAGER='less'
@@ -86,14 +86,10 @@ export PROJECT_PATH=~/docker
 # This needs to come before any custom aliases.
 source $ZSH/oh-my-zsh.sh
 
-alias df='df -hl'
-alias ls='ls -lFGh --color'
-alias lls='ls -C'
-alias iotop='iotop -o'
-alias journalctl='journalctl -e'
-alias docker-compose='export COMPOSE_FILE=`find ~/docker/ -maxdepth 3 -type f -name docker-compose.yaml -printf "${HOME}/docker/%P:" | sed "s/:*$//"`; docker-compose'
-alias compose='docker-compose'
+alias ls='ls -lFh'
+alias df='df -h'
+alias vi='vim'
+alias compose='export COMPOSE_FILE=`find ~/docker/ -maxdepth 3 -type f -name docker-compose.yaml -printf "${HOME}/docker/%P:" | sed "s/:*$//"`; docker-compose'
 alias console='compose exec'
 alias log='compose logs -f --tail="100"'
 iotest() { sudo dd if=/dev/zero of="$1"/ddfile bs=1M count=256 conv=fdatasync; sudo rm "$1"/ddfile; }
-

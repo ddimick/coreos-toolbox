@@ -9,6 +9,6 @@ services:
       - ~/.ssh:/home/core/.ssh
       - ~/.git:/home/core/.git
       - ~/.gitconfig:/home/core/.gitconfig
+      - ~/docker:/home/core/docker
       - /mnt:/mnt
-      - /mnt/system0/docker:/home/core/docker
       - /var/run/docker.sock:/var/run/docker.sock
