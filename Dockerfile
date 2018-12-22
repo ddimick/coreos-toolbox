@@ -13,6 +13,7 @@ RUN apk add --no-cache \
       docker \
       py-pip \
       sudo \
+      openssh-client \
       findutils \
       git \
       zsh \
