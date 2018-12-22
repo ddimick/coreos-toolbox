@@ -11,7 +11,7 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y zsh zsh-common git git-core tmux sed curl wget \
         sudo net-tools inetutils-ping bash-completion openssh-client vim \
-        gcc make autoconf tzdata locales docker.io && \
+        gcc make autoconf tzdata locales docker.io rsync && \
     locale-gen en_US.UTF-8 && \
   # docker-compose
     curl -L https://github.com/docker/compose/releases/download/${DOCKERCOMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose && \
