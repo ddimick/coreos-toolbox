@@ -5,6 +5,10 @@ services:
     image: ddimick/coreos-toolbox:latest
     build: ${PROJECT_PATH}/services/coreos-toolbox
     hostname: toolbox
+    restart: "no"
+    environment:
+      - COMPOSE_PROJECT_NAME=mystack
+      - PROJECT_PATH=~/docker
     volumes:
       - ~/.ssh:/home/core/.ssh
       - ~/.git:/home/core/.git
@@ -12,3 +16,4 @@ services:
       - ~/docker:/home/core/docker
       - /mnt:/mnt
       - /var/run/docker.sock:/var/run/docker.sock
+    command: echo "coreos-toolbox docker-compose statup disabled"

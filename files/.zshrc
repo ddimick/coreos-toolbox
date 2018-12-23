@@ -79,10 +79,6 @@ export EDITOR='vim'
 export PAGER='less'
 export LESS='-m --follow-name'
 
-# Options used by docker-compose.
-export COMPOSE_PROJECT_NAME=mystack
-export PROJECT_PATH=~/docker
-
 # This needs to come before any custom aliases.
 source $ZSH/oh-my-zsh.sh
 
