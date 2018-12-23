@@ -27,6 +27,7 @@ RUN apk add --no-cache \
       curl \
       vim \
       docker-vim \
+      htop \
       rsync && \
     apk add --no-cache --virtual .build-dependencies py-pip && \
     pip install --disable-pip-version-check --no-cache-dir docker-compose && \
