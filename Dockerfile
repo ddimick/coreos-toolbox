@@ -17,6 +17,7 @@ RUN apk add --no-cache \
       findutils \
       git \
       zsh \
+      tzdata \
       docker-zsh-completion \
       git-zsh-completion \
       rsync-zsh-completion \
