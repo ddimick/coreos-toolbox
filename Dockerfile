@@ -1,14 +1,15 @@
 # Set the base image to Ubuntu Server
 FROM alpine:latest
 
-ENV TZ=America/Los_Angeles
+ARG USER=core
+ARG USER_UID=500
+ARG USER_GID=500
+ARG DOCKER_GID=233
+
 ENV DOCKERCOMPOSE_VERSION=1.23.0
 ENV CT_VER=v0.6.1
-ENV USER_NAME=core
-ENV USER_UID=500
-ENV USER_GID=500
-ENV DOCKER_GID=233
-ENV HOME=/home/${USER_NAME}
+
+ENV HOME=/home/${USER}
 
 # Package installation
 RUN apk add --no-cache \
@@ -37,7 +38,7 @@ RUN apk add --no-cache \
     apk del .build-dependencies && \
 # User and group creation
     groupmod --gid ${DOCKER_GID} docker && \
-    groupadd --gid ${USER_GID} ${USER_NAME} && \
+    groupadd --gid ${USER_GID} ${USER} && \
     useradd --uid ${USER_UID} --gid ${USER_GID} --groups docker --shell /bin/zsh --comment 'CoreOS Admin' core && \
     echo "core ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
 # Install CoreOS cloud-config.yaml to ignition.json Config Transpiler
@@ -52,6 +53,6 @@ RUN chown -R ${USER_UID}:${USER_GID} ${HOME}
 
 WORKDIR ${HOME}
 
-USER ${USER_NAME}
+USER ${USER}
 
 CMD ["/bin/zsh"]

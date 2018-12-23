@@ -3,17 +3,15 @@ version: "3.7"
 services:
   toolbox:
     image: ddimick/coreos-toolbox:latest
-    build: ${PROJECT_PATH}/services/coreos-toolbox
+    build: ${PROJECT_PATH}/coreos-toolbox
     hostname: toolbox
     restart: "no"
-    environment:
-      - COMPOSE_PROJECT_NAME=mystack
-      - PROJECT_PATH=~/docker
     volumes:
       - ~/.ssh:/home/core/.ssh
       - ~/.git:/home/core/.git
       - ~/.gitconfig:/home/core/.gitconfig
       - ~/docker:/home/core/docker
+      - ~/docker-stack:/home/core/docker-stack
       - /mnt:/mnt
       - /var/run/docker.sock:/var/run/docker.sock
-    command: echo "coreos-toolbox docker-compose statup disabled"
+    command: echo "coreos-toolbox docker-compose startup disabled"
