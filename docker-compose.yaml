@@ -4,14 +4,5 @@ services:
   toolbox:
     image: ddimick/coreos-toolbox:latest
     build: ${PROJECT_PATH}/coreos-toolbox
-    hostname: toolbox
     restart: "no"
-    volumes:
-      - ~/.ssh:/home/core/.ssh
-      - ~/.git:/home/core/.git
-      - ~/.gitconfig:/home/core/.gitconfig
-      - ~/docker:/home/core/docker
-      - ~/docker-stack:/home/core/docker-stack
-      - /mnt:/mnt
-      - /var/run/docker.sock:/var/run/docker.sock
     command: echo "coreos-toolbox docker-compose startup disabled"
