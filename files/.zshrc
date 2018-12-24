@@ -82,8 +82,6 @@ export LESS='-m --follow-name'
 # This needs to come before any custom aliases.
 source $ZSH/oh-my-zsh.sh
 
-compinit -d ~/.zcompdump-${HOSTNAME}
-
 alias ls='ls -lFh'
 alias df='df -h'
 alias vi='vim'
