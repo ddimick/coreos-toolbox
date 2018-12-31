@@ -77,7 +77,6 @@ plugins=(sudo tmux git colored-man-pages zsh-syntax-highlighting docker docker-c
 # export MANPATH="/usr/local/man:$MANPATH"
 export EDITOR='vim'
 export PAGER='less'
-export LESS='-m --follow-name'
 
 # This needs to come before any custom aliases.
 source $ZSH/oh-my-zsh.sh

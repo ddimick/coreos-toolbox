@@ -15,7 +15,6 @@ ENV HOME=/home/${USER}
 RUN apk add --no-cache \
       shadow \
       docker \
-      py-pip \
       sudo \
       openssh-client \
       findutils \
@@ -29,6 +28,7 @@ RUN apk add --no-cache \
       zsh-vcs \
       tmux \
       curl \
+      less \
       vim \
       docker-vim \
       htop \
