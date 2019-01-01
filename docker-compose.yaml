@@ -3,6 +3,6 @@ version: "3.7"
 services:
   toolbox:
     image: ddimick/coreos-toolbox:latest
-    build: ${PROJECT_PATH}/coreos-toolbox
+    build: ${PROJECT_PATH}/build/coreos-toolbox
     restart: "no"
     command: echo "coreos-toolbox docker-compose startup disabled"
