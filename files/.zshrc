@@ -85,6 +85,7 @@ alias ls='ls -lFh'
 alias df='df -h'
 alias vi='vim'
 alias compose='export COMPOSE_FILE=`find ${PROJECT_PATH} -maxdepth 2 -type f -name docker-compose.yaml -printf "${PROJECT_PATH}/%P:" | sed "s/:*$//"`; docker-compose'
+alias build='export COMPOSE_FILE=`find ${PROJECT_PATH}/build -maxdepth 2 -type f -name docker-compose.yaml -printf "${PROJECT_PATH}/build/%P:" | sed "s/:*$//"`; docker-compose build --pull'
 alias console='compose exec'
 alias log='compose logs -f --tail="100"'
 iotest() { sudo dd if=/dev/zero of="$1"/ddfile bs=1M count=256 conv=fdatasync; sudo rm "$1"/ddfile; }
