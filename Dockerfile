@@ -32,10 +32,9 @@ RUN apk add --no-cache \
       vim \
       docker-vim \
       htop \
-      rsync && \
-    apk add --no-cache --virtual .build-dependencies py-pip && \
+      rsync \
+      py-pip && \
     pip install --disable-pip-version-check --no-cache-dir docker-compose && \
-    apk del .build-dependencies && \
 # User and group creation
     groupmod --gid ${DOCKER_GID} docker && \
     groupadd --gid ${USER_GID} ${USER} && \
