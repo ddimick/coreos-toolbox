@@ -77,16 +77,26 @@ plugins=(sudo tmux git colored-man-pages zsh-syntax-highlighting docker docker-c
 # export MANPATH="/usr/local/man:$MANPATH"
 export EDITOR='vim'
 export PAGER='less'
+export BAT_THEME='Monokai Extended'
 
 # This needs to come before any custom aliases.
 source $ZSH/oh-my-zsh.sh
 
-alias ls='ls -lFh'
+# Jump-list cd (i.e. "z foo")
+source /usr/local/bin/z.sh
+
+alias cat='bat'
+alias less='bat'
+alias more='bat'
+alias ls='exa -l --group-directories-first --git'
 alias df='df -h'
+alias du='du -h'
 alias vi='vim'
+
 alias compose='export COMPOSE_FILE=`find ${PROJECT_PATH} -maxdepth 2 -type f -name docker-compose.yaml -printf "${PROJECT_PATH}/%P:" | sed "s/:*$//"`; docker-compose'
 alias build='export COMPOSE_FILE=`find ${PROJECT_PATH}/build -maxdepth 2 -type f -name docker-compose.yaml -printf "${PROJECT_PATH}/build/%P:" | sed "s/:*$//"`; docker-compose build --pull'
 alias push='export COMPOSE_FILE=`find ${PROJECT_PATH}/build -maxdepth 2 -type f -name docker-compose.yaml -printf "${PROJECT_PATH}/build/%P:" | sed "s/:*$//"`; docker-compose push --ignore-push-failures'
 alias console='compose exec'
 alias log='compose logs -f --tail="100"'
+
 iotest() { sudo dd if=/dev/zero of="$1"/ddfile bs=1M count=256 conv=fdatasync; sudo rm "$1"/ddfile; }
