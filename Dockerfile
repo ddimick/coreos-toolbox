@@ -20,6 +20,7 @@ RUN apk update && \
       htop \
       less \
       libgcc \
+      openssh-client \
       python2 \
       rsync \
       rsync-zsh-completion \
