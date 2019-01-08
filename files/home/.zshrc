@@ -83,7 +83,11 @@ export BAT_THEME='Monokai Extended'
 source $ZSH/oh-my-zsh.sh
 
 # Jump-list cd (i.e. "z foo")
-source /usr/local/bin/z.sh
+[ -f /usr/local/bin/z.sh ] && source /usr/local/bin/z.sh
+
+# Fuzzy search
+[[ $- == *i* ]] && source ~/.fzf/completion.zsh 2> /dev/null
+[ -f ~/.fzf/key-bindings.zsh ] && source ~/.fzf/key-bindings.zsh
 
 alias cat='bat -p'
 alias less='bat -p'
