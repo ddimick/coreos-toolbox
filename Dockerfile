@@ -43,9 +43,7 @@ RUN apk update && \
     groupmod --gid ${DOCKER_GID} docker && \
     groupadd --gid ${USER_GID} ${USER} && \
     useradd --uid ${USER_UID} --gid ${USER_GID} --groups docker --shell /bin/zsh --comment 'CoreOS Admin' core && \
-    echo "${USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-# Seed z's directory cache
-    echo -e $(find ${PROJECT_PATH} -maxdepth 2 -type d -exec echo "{}|1|$(date +%s)\n" \;) > ${HOME}/.z && sed -i "s/^\s//" ${HOME}/.z
+    echo "${USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 COPY files/home/ ${HOME}/
 COPY files/bin/ /usr/local/bin/

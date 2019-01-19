@@ -82,12 +82,13 @@ export BAT_THEME='Monokai Extended'
 # This needs to come before any custom aliases.
 source $ZSH/oh-my-zsh.sh
 
-# Jump-list cd (i.e. "z foo")
-[ -f /usr/local/bin/z.sh ] && source /usr/local/bin/z.sh
+# Jump-list cd (i.e. "z foo"). Seed the directory cache if it doesn't already exist.
+[[ ! -a ~/.z ]] && echo -e $(find ${PROJECT_PATH} -maxdepth 2 -type d -exec echo "{}|1|$(date +%s)\n" \;) > ~/.z && sed -i "s/^\s//" ~/.z
+[[ -f /usr/local/bin/z.sh ]] && source /usr/local/bin/z.sh
 
 # Fuzzy search
 [[ $- == *i* ]] && source ~/.fzf/completion.zsh 2> /dev/null
-[ -f ~/.fzf/key-bindings.zsh ] && source ~/.fzf/key-bindings.zsh
+[[ -f ~/.fzf/key-bindings.zsh ]] && source ~/.fzf/key-bindings.zsh
 
 alias cat='bat -p'
 alias less='bat -p'

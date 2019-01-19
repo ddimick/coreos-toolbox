@@ -6,5 +6,3 @@ services:
     build: ${PROJECT_PATH}/build/coreos-toolbox
     restart: "no"
     command: echo "coreos-toolbox docker-compose startup disabled"
-    volumes:
-      - ${PROJECT_PATH}:${PROJECT_PATH}
