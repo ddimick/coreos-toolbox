@@ -101,6 +101,7 @@ alias vi='vim'
 alias compose='export COMPOSE_FILE=`find ${PROJECT_PATH} -maxdepth 2 -type f -name docker-compose.yaml -printf "${PROJECT_PATH}/%P:" | sed "s/:*$//"`; docker-compose'
 alias build='export COMPOSE_FILE=`find ${PROJECT_PATH}/build -maxdepth 2 -type f -name docker-compose.yaml -printf "${PROJECT_PATH}/build/%P:" | sed "s/:*$//"`; docker-compose build --pull --compress'
 alias push='export COMPOSE_FILE=`find ${PROJECT_PATH}/build -maxdepth 2 -type f -name docker-compose.yaml -printf "${PROJECT_PATH}/build/%P:" | sed "s/:*$//"`; docker-compose push --ignore-push-failures'
+alias pull='compose pull --ignore-pull-failures'
 alias console='compose exec'
 alias log='compose logs -f --tail="100"'
 
