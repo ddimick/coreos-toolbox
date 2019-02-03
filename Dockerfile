@@ -8,7 +8,7 @@ ARG DOCKER_GID=233
 ENV HOME=/home/${USER}
 
 # Package installation
-RUN apk update && \
+RUN apk update --no-cache && \
     apk add --no-cache \
       curl \
       docker \
@@ -18,10 +18,8 @@ RUN apk update && \
       git \
       git-zsh-completion \
       htop \
-      less \
       libgcc \
       openssh-client \
-      python2 \
       rsync \
       rsync-zsh-completion \
       shadow \
@@ -32,10 +30,7 @@ RUN apk update && \
       vim \
       zsh \
       zsh-vcs && \
-# Install docker-compose
-    apk add --no-cache --virtual .build-deps py-pip && \
-    pip install --disable-pip-version-check --no-cache-dir docker-compose && \
-    apk del .build-deps && \
+    apk add --no-cache docker-compose --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing && \
     rm -rf /var/cache/apk/* && \
 # Install oh-my-zsh
     git clone https://github.com/robbyrussell/oh-my-zsh.git ${HOME}/.oh-my-zsh && \
