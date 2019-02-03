@@ -18,6 +18,7 @@ RUN apk update --no-cache && \
       git \
       git-zsh-completion \
       htop \
+      less \
       libgcc \
       openssh-client \
       rsync \
