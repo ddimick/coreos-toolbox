@@ -70,7 +70,7 @@ ZSH_TMUX_FIXTERM="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(sudo tmux git colored-man-pages zsh-syntax-highlighting docker docker-compose systemd)
+plugins=(sudo tmux git colored-man-pages zsh-syntax-highlighting docker docker-compose)
 
 # User configuration
 # export PATH="~/.local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin"
