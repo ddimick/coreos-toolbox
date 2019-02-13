@@ -70,30 +70,38 @@ ZSH_TMUX_FIXTERM="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(sudo tmux git colored-man-pages zsh-syntax-highlighting docker docker-compose)
+plugins=(sudo tmux git zsh-syntax-highlighting docker docker-compose)
 
 # User configuration
-# export PATH="~/.local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin"
-# export MANPATH="/usr/local/man:$MANPATH"
 export EDITOR='vim'
 export PAGER='less'
-export BAT_THEME='Monokai Extended'
 
 # This needs to come before any custom aliases.
 source $ZSH/oh-my-zsh.sh
 
 # Jump-list cd (i.e. "z foo"). Seed the directory cache if it doesn't already exist.
-[[ ! -a ~/.z ]] && echo -e $(find ${PROJECT_PATH} -maxdepth 2 -type d -exec echo "{}|1|$(date +%s)\n" \;) > ~/.z && sed -i "s/^\s//" ~/.z
-[[ -f /usr/local/bin/z.sh ]] && source /usr/local/bin/z.sh
+[[ -f /usr/local/bin/z.sh ]] && \
+  source /usr/local/bin/z.sh
+[[ ! -a ~/.z ]] && \
+  echo -e $(find ${PROJECT_PATH} -maxdepth 2 -type d -exec echo "{}|1|$(date +%s)\n" \;) > ~/.z && sed -i "s/^\s//" ~/.z
 
 # Fuzzy search
-[[ $- == *i* ]] && source ~/.fzf/completion.zsh 2> /dev/null
-[[ -f ~/.fzf/key-bindings.zsh ]] && source ~/.fzf/key-bindings.zsh
+[[ $- == *i* ]] && \
+  source ~/.fzf/completion.zsh 2> /dev/null
+[[ -f ~/.fzf/key-bindings.zsh ]] && \
+  source ~/.fzf/key-bindings.zsh
 
-alias cat='bat -p'
-alias less='bat -p'
-alias more='bat -p'
-alias ls='exa -l --group-directories-first --git'
+# Replace ls with exa
+[[ -f /usr/local/bin/exa ]] && \
+  alias ls='exa -l --group-directories-first --git'
+
+# Replace cat/less/more with bat
+[[ -f /usr/local/bin/bat ]] && \
+  export BAT_THEME='Monokai Extended' && \
+  alias cat='bat -p' && \
+  alias less='bat -p' && \
+  alias more='bat -p'
+
 alias df='df -h'
 alias du='du -h'
 alias vi='vim'
