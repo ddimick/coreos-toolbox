@@ -43,6 +43,12 @@ RUN groupadd --gid ${DOCKER_GID} docker && \
     useradd --uid ${USER_UID} --gid ${USER_GID} --groups docker --shell /bin/zsh --comment 'CoreOS Admin' core && \
     echo "${USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
+# Install bat and exa
+RUN apk add --no-cache --virtual .build-deps build-base cmake go cargo && \
+    cargo install --root /usr/local bat exa && \
+    rm -rf ${HOME}/.cargo && \
+    apk del .build-deps
+
 # Install docker CLI
 RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz && \
     tar xzvf docker-${DOCKER_VERSION}.tgz --strip 1 -C /usr/local/bin docker/docker && \
@@ -55,14 +61,9 @@ RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${
     tar zxvf v${Z_VERSION}.tar.gz --strip 1 -C /usr/local/bin z-${Z_VERSION}/z.sh && \
     rm v${Z_VERSION}.tar.gz && \
 # Install fzf
-    curl -fsSLO https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-${FZF_VERSION}-linux_amd64.tgz && \
+    curl -fsSLO https://github.com/junegunn/fzf-bin/releases/download/${FZF_VERSION}/fzf-${FZF_VERSION}-linux_amd64.tgz && \
     tar zxvf fzf-${FZF_VERSION}-linux_amd64.tgz -C /usr/local/bin && \
     rm fzf-${FZF_VERSION}-linux_amd64.tgz && \
-# Install bat and exa
-    apk add --no-cache --virtual .build-deps build-base cmake go cargo && \
-    cargo install --root /usr/local bat exa && \
-    rm -rf ${HOME}/.cargo && \
-    apk del .build-deps && \
 # Install oh-my-zsh
     git clone https://github.com/robbyrussell/oh-my-zsh.git ${HOME}/.oh-my-zsh
 
