@@ -111,6 +111,7 @@ alias build='export COMPOSE_FILE=`find ${PROJECT_PATH}/build -maxdepth 2 -type f
 alias push='export COMPOSE_FILE=`find ${PROJECT_PATH}/build -maxdepth 2 -type f -name docker-compose.yaml -printf "${PROJECT_PATH}/build/%P:" | sed "s/:*$//"`; docker-compose push --ignore-push-failures'
 alias pull='compose pull --ignore-pull-failures'
 alias console='compose exec'
-alias log='docker run --rm -it --net docker-stack_elasticsearch --name elktail svendowideit/elktail --url http://elasticsearch:9200 -t "created" -f "%timestamp %message" container_name:'
+#alias log='docker run --rm -it --net docker-stack_elasticsearch --name elktail svendowideit/elktail --url http://elasticsearch:9200 -t "created" -f "%timestamp %message" container_name:'
+alias log='docker logs -f'
 
 iotest() { sudo dd if=/dev/zero of="$1"/ddfile bs=1M count=256 conv=fdatasync; sudo rm "$1"/ddfile; }
